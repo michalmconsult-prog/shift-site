@@ -7,7 +7,76 @@
 <meta name="description" content="מיכל לוי, Shift: ליווי ארגונים וסוכנויות ביטוח בהטמעת מערכות ו-AI, מהאבחון הראשון ועד שהמערכת הופכת להרגל עבודה.">
 <meta property="og:title" content="Shift – אנשים. מערכות. תוצאות.">
 <meta property="og:description" content="מערכות חדשות לא נכשלות בגלל הטכנולוגיה. הן נכשלות כשאנשים לא עובדים איתן.">
-<meta property="og:image" content="images/logo.png">
+<link rel="canonical" href="https://shift-ml.co.il/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shift-ml.co.il/">
+<meta property="og:site_name" content="Shift">
+<meta property="og:image" content="https://shift-ml.co.il/images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://shift-ml.co.il/#org",
+   "name": "Shift",
+   "alternateName": "שיפט",
+   "url": "https://shift-ml.co.il/",
+   "logo": "https://shift-ml.co.il/images/logo.png",
+   "image": "https://shift-ml.co.il/images/logo.png",
+   "slogan": "אנשים. מערכות. תוצאות.",
+   "description": "ליווי ארגונים וסוכנויות ביטוח בהטמעת מערכות ואסטרטגיית AI, מהאבחון הראשון ועד שהמערכת הופכת להרגל עבודה.",
+   "founder": {
+    "@id": "https://shift-ml.co.il/#person"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Israel"
+   },
+   "knowsAbout": [
+    "אסטרטגיית AI",
+    "הטמעת מערכות",
+    "ניהול שינוי",
+    "אימוץ טכנולוגיה",
+    "סוכנויות ביטוח",
+    "Insurtech"
+   ],
+   "email": "michalmconsult@gmail.com",
+   "telephone": "+972-52-617-8108",
+   "sameAs": [
+    "https://www.linkedin.com/in/miclevy/"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://shift-ml.co.il/#person",
+   "name": "מיכל לוי",
+   "alternateName": "Michal Levy",
+   "jobTitle": "מייסדת ומנכ\"לית Shift",
+   "url": "https://shift-ml.co.il/#about",
+   "image": "https://shift-ml.co.il/images/michal.jpg",
+   "worksFor": {
+    "@id": "https://shift-ml.co.il/#org"
+   },
+   "sameAs": [
+    "https://polisa.news/author/michalevi/",
+    "https://www.linkedin.com/in/miclevy/"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://shift-ml.co.il/#website",
+   "url": "https://shift-ml.co.il/",
+   "name": "Shift",
+   "inLanguage": "he-IL",
+   "publisher": {
+    "@id": "https://shift-ml.co.il/#org"
+   }
+  }
+ ]
+}
+</script>
 <meta property="og:locale" content="he_IL">
 <link rel="icon" href="images/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;1,700&amp;display=swap" rel="stylesheet">
@@ -230,6 +299,7 @@ html{scroll-behavior:smooth}
         </label>
         <label style="display: flex; flex-direction: column; gap: 6px; font-size: 16px; font-weight: 500">מה מעסיק אתכם?
           <textarea name="message" rows="4" style="padding: 12px 14px; border: 1px solid #8FA7B8; border-radius: 12px; font: inherit; font-weight: 400; background: #F5FAFB; color: #091D3F; resize: vertical"></textarea>
+          <span style="font-size: 15px; font-weight: 400; color: #43536C">כדי לשמור על פרטיות, אין לכתוב כאן פרטים מזהים של מבוטחים. מספיק תיאור כללי.</span>
         </label>
         <button type="button" id="send-btn" style="align-self: flex-start; min-height: 52px; padding: 0 32px; border: 0; border-radius: 26px; background: #8CEB45; color: #091D3F; font: inherit; font-weight: 700; cursor: pointer">שליחה</button>
         <p id="form-status" role="status" aria-live="polite" style="margin: 0; font-weight: 500; min-height: 1.6em"></p>
@@ -261,7 +331,14 @@ html{scroll-behavior:smooth}
     function done(){sending=false;btn.textContent='שליחה';}
     function fallback(){
       done();
-      window.location.href='mailto:michalmconsult@gmail.com?subject='+encodeURIComponent('ליד מהאתר')+'&body='+encodeURIComponent(body);
+      status.innerHTML='';
+      status.appendChild(document.createTextNode('הפנייה לא נשלחה. אפשר לפנות אליי ישירות ב'));
+      var wa=document.createElement('a'); wa.href='https://wa.me/972526178108?text='+encodeURIComponent('ליד מהאתר\n'+body); wa.target='_blank'; wa.rel='noopener'; wa.textContent='וואטסאפ';
+      status.appendChild(wa);
+      status.appendChild(document.createTextNode(' או '));
+      var em=document.createElement('a'); em.href='mailto:michalmconsult@gmail.com?subject='+encodeURIComponent('ליד מהאתר')+'&body='+encodeURIComponent(body); em.textContent='במייל';
+      status.appendChild(em);
+      status.appendChild(document.createTextNode('.'));
     }
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({access_key:'ab0e8610-3daa-48b3-ad42-b943202c63c6',subject:'ליד מהאתר',from_name:'אתר Shift','שם מלא':d.name,'שם הארגון':d.agency,'טלפון':d.phone,'מה מעסיק אתכם':d.message})})
